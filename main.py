@@ -1,9 +1,4 @@
-import json
 from funciones import *
-
-def cargar_json():
-    with open('musica.json', 'r', encoding='utf-8') as f:
-        return json.load(f)
 
 def menu():
     print("\n--- MENÚ ---")
@@ -15,42 +10,28 @@ def menu():
     print("6. Salir")
 
 def main():
-    doc = cargar_json()
-    ejecutar = True  # Flag para controlar el bucle
+    doc = cargar_datos()
+    ejecutar = True
     
     while ejecutar:
         menu()
-        opcion = input("Seleccione una opción: ")
+        opcion = input("Seleccione una opción: ").strip()
         
         if opcion == "1":
-            nombre = input("Nombre del artista: ")
-            albumes = listar_albumes_artista(doc, nombre)
-            if albumes:
-                print(f"\nÁlbumes de {nombre}:")
-                for alb in albumes:
-                    print(f"\n- {alb['titulo']} ({alb['año']})")
-                    print("  Canciones:")
-                    for cancion in alb['canciones']:
-                        print(f"    • {cancion}")
-            else:
-                print("Artista no encontrado")
-        
+            listar_albumes_artista(doc)
         elif opcion == "2":
-            canciones, generos = contar_datos(doc)
-            print("\nCanciones por artista:")
-            for art, num in canciones.items():
-                print(f"- {art}: {num} canciones")
-            
-            print("\nÁlbumes por género:")
-            for gen, num in generos.items():
-                print(f"- {gen}: {num} álbumes")
-                
-       elif opcion == "6":
-          print("¡Hasta luego!")
-          ejecutar = False  
-        
-      else:
-          print("Opción inválida")
+            contar_datos(doc)
+        elif opcion == "3":
+            filtrar_por_genero(doc)
+        elif opcion == "4":
+            buscar_cancion(doc)
+        elif opcion == "5":
+            generar_rankings(doc)
+        elif opcion == "6":
+            print("¡Hasta luego!")
+            ejecutar = False
+        else:
+            print("Opción inválida")
 
 if __name__ == "__main__":
     main()
