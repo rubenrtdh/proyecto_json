@@ -30,3 +30,14 @@ def contar_datos(doc):
             conteo_generos[album['genero']] = conteo_generos.get(album['genero'], 0) + 1
     
     return conteo_canciones, conteo_generos
+# Ejercicio 3: Filtrar por género
+def filtrar_por_genero(doc, genero):
+    resultados = []
+    for artista in doc['artistas']:
+        albumes_filtrados = [
+            (artista['nombre'], album['titulo'], album['año'])
+            for album in artista['albumes']
+            if album['genero'].lower() == genero.lower()
+        ]
+        resultados.extend(albumes_filtrados)
+    return resultados
