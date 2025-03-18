@@ -34,6 +34,17 @@ def main():
                         print(f"    • {cancion}")
             else:
                 print("Artista no encontrado")
+        
+        elif opcion == "2":
+            canciones, generos = contar_datos(doc)
+            print("\nCanciones por artista:")
+            for art, num in canciones.items():
+                print(f"- {art}: {num} canciones")
+            
+            print("\nÁlbumes por género:")
+            for gen, num in generos.items():
+                print(f"- {gen}: {num} álbumes")
+                
        elif opcion == "6":
           print("¡Hasta luego!")
           ejecutar = False  
